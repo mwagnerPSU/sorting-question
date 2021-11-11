@@ -47,8 +47,12 @@ What properties need mapped to HAX / the storybook? What can the user interact w
 ![Drawing of our design](assets/sketch.jpg)
 
 ### Check-in 2
-- 
-- 
+- We do not really plan to deligate work because this project entails more logic than a bunch of different elements 
+- we plan to keep meeting VIA Zoom to collaborate on the code together at least twice a week 
+- we had made a really good prototype and have a good layout on how we want to go about working on this code 
+- conceptualized our vision 
+- everyone took notes from class on how we could go about this best 
+- we planned what we want to do next to make sure we kept on track 
 ### Check-in 3
 - 
 - 
