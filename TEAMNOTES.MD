@@ -44,6 +44,8 @@ What properties need mapped to HAX / the storybook? What can the user interact w
 - the user will be able to interact with flipping the card 
 - be able to drag and drop cards into different piles of right and wrong 
 
+![Drawing of our design](assets/sketch.png)
+
 ### Check-in 2
 - 
 - 
