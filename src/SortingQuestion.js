@@ -1,5 +1,6 @@
 // dependencies / things imported
 import { LitElement, html, css } from 'lit';
+import './sq-question.js';
 
 // EXPORT (so make available to other documents that reference this file) a class, that extends LitElement
 // which has the magic life-cycles and developer experience below added
@@ -13,12 +14,14 @@ export class SortingQuestion extends LitElement {
   constructor() {
     super();
     this.need = 'all need to succeed';
+    this.questions = ['1', '2', '3', '4', '5'];
   }
 
   // properties that you wish to use as data in HTML, CSS, and the updated life-cycle
   static get properties() {
     return {
       need: { type: String, reflect: true },
+      questions: { type: Array, reflect: true },
     };
   }
 
@@ -52,11 +55,29 @@ export class SortingQuestion extends LitElement {
     super.disconnectedCallback();
   }
 
+  // how do i get this to run and populate after div is loaded
+  // makeQuestions() {
+  //   let questionCount = 0;
+  //   this.questions.forEach(() => {
+  //     let element = document.createElement("sq-question");
+  //     let text = document.createTextNode(this.questions[questionCount]);
+  //     element.appendChild(text);
+
+  //     console.log(element);
+
+  //     document.shadowRoot.querySelector(".questionArea").aooendChild(element);
+
+  //     questionCount++;
+  //   });
+  // }
+
   // CSS - specific to Lit
   static get styles() {
     return css`
       :host {
         display: block;
+        width: 700px;
+        height: 500px;
       }
       :host([need='joy']) {
         color: yellow;
@@ -71,6 +92,15 @@ export class SortingQuestion extends LitElement {
       <h1>Make me awesome</h1>
       <p>Build the future we ${this.need}.</p>
       <slot></slot>
+
+      <!--Would be where questions go when dynamic question creation works-->
+      <div class="questionArea"></div>
+
+      <sq-question>${this.questions[0]}</sq-question>
+      <sq-question>${this.questions[1]}</sq-question>
+      <sq-question>${this.questions[2]}</sq-question>
+      <sq-question>${this.questions[3]}</sq-question>
+      <sq-question>${this.questions[4]}</sq-question>
     `;
   }
 
@@ -86,3 +116,5 @@ export class SortingQuestion extends LitElement {
     ).href;
   }
 }
+
+window.customElements.define(SortingQuestion.tag, SortingQuestion);
