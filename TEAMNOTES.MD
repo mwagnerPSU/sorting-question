@@ -54,8 +54,10 @@ What properties need mapped to HAX / the storybook? What can the user interact w
 - everyone took notes from class on how we could go about this best 
 - we planned what we want to do next to make sure we kept on track 
 ### Check-in 3
-- 
-- 
+- Project is currently being worked on to ellude feedback on progess
+- Class activity resulted in a good insight to give the user capabilities to use keyboard input along with click events
+- Next steps are to get the project together visually then put together logic behind sorting and answer checking
+- Will have at least visuals done by class tuesday, and if time allows, some logic and functionality
 ### Check-in 4
 - 
 - 
