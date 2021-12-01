@@ -1,6 +1,8 @@
 // dependencies / things imported
 import { LitElement, html, css } from 'lit';
 import './sq-question.js';
+import '@lrnwebcomponents/simple-icon/lib/simple-icon-lite.js';
+import '@lrnwebcomponents/simple-icon/lib/simple-icons.js';
 
 // EXPORT (so make available to other documents that reference this file) a class, that extends LitElement
 // which has the magic life-cycles and developer experience below added
@@ -13,15 +15,27 @@ export class SortingQuestion extends LitElement {
   // HTMLElement life-cycle, built in; use this for setting defaults
   constructor() {
     super();
-    this.need = 'all need to succeed';
-    this.questions = ['1', '2', '3', '4', '5'];
+    //this.need = 'all need to succeed';
+    this.title = "Gimme a title!";
+    this.checking = false;
+    this.questionAmount = this.children.length;
+    this.correctNum = 0;
+    this.correctOrder = [];
+
+    for(var i = 0; i < this.questionAmount; i++){
+      this.correctOrder.push(this.children[i]);
+    }
   }
 
   // properties that you wish to use as data in HTML, CSS, and the updated life-cycle
   static get properties() {
     return {
-      need: { type: String, reflect: true },
-      questions: { type: Array, reflect: true },
+      //need: { type: String, reflect: true },
+      correctOrder: { type: Array },
+      title: { type: String, reflect: true },
+      checking: { type: Boolean, reflect: true },
+      correctNum: { type: Number },
+      correctPos: { type: Number, reflect: false },
     };
   }
 
@@ -29,8 +43,15 @@ export class SortingQuestion extends LitElement {
   // this allows you to react to variables changing and use javascript to perform logic
   updated(changedProperties) {
     changedProperties.forEach((oldValue, propName) => {
-      if (propName === 'need' && this[propName] === 'joy') {
-        this.classList.add('joyful');
+      // if (propName === 'need' && this[propName] === 'joy') {
+      //   this.classList.add('joyful');
+      // }
+
+      //not sure about this
+      if (propName === "checking") {
+        if(this.checking) {
+          this.checkQuestions();
+        }
       }
     });
   }
@@ -55,21 +76,30 @@ export class SortingQuestion extends LitElement {
     super.disconnectedCallback();
   }
 
-  // how do i get this to run and populate after div is loaded
-  // makeQuestions() {
-  //   let questionCount = 0;
-  //   this.questions.forEach(() => {
-  //     let element = document.createElement("sq-question");
-  //     let text = document.createTextNode(this.questions[questionCount]);
-  //     element.appendChild(text);
+  __check() {
+    this.checking = true;
 
-  //     console.log(element);
+    //if statement that checks if order is right?
 
-  //     document.shadowRoot.querySelector(".questionArea").aooendChild(element);
+    this.correctNum = this.checkedNum;
+  }
 
-  //     questionCount++;
-  //   });
-  // }
+  //not sure about this
+  checkQuestions() {
+    let checkedNum = 0;
+
+    for (let i = 0; i < this.questionAmount; i++) {
+      if(this.children[i].isEqualNode(this.correctOrder[i])){
+        checkedNum++;
+      }
+    }
+    
+    this.correctNum = checkedNum;
+  }
+
+  __retry() {
+    this.checking = false;
+  }
 
   // CSS - specific to Lit
   static get styles() {
@@ -77,11 +107,37 @@ export class SortingQuestion extends LitElement {
       :host {
         display: block;
         width: 700px;
-        height: 500px;
+        padding: 10px;
+        border: 1px solid gray;
       }
-      :host([need='joy']) {
+
+      /* :host([need='joy']) {
         color: yellow;
         background-color: black;
+      } */
+
+      .checkArea {
+        display: flex;
+      }
+
+      .checkButton {
+        color: white;
+        background-color: #1a73d9;
+        border-radius: 20px;
+        font-size: 12pt;
+        padding: 2px 10px;
+      }
+
+      .statusText {
+        margin-right: 20px;
+      }
+
+      .resetButton {
+        color: white;
+        background-color: #1a73d9;
+        border-radius: 20px;
+        font-size: 12pt;
+        padding: 2px 10px;
       }
     `;
   }
@@ -89,18 +145,25 @@ export class SortingQuestion extends LitElement {
   // HTML - specific to Lit
   render() {
     return html`
-      <h1>Make me awesome</h1>
-      <p>Build the future we ${this.need}.</p>
-      <slot></slot>
+      <h2>${this.title}</h2>
 
-      <!--Would be where questions go when dynamic question creation works-->
-      <div class="questionArea"></div>
+      <div class="questionArea"><slot></slot></div>
 
-      <sq-question>${this.questions[0]}</sq-question>
-      <sq-question>${this.questions[1]}</sq-question>
-      <sq-question>${this.questions[2]}</sq-question>
-      <sq-question>${this.questions[3]}</sq-question>
-      <sq-question>${this.questions[4]}</sq-question>
+      <div class="checkArea">
+        ${!this.checking
+          ? html`
+            <button class="checkButton" @click="${this.__check}" tabindex='-1'>
+              <simple-icon-lite icon="check"></simple-icon-lite>
+
+              Check
+            </button>
+          `
+          : html`
+            <p class="statusText">Correct: ${this.correctNum}</p>
+            <button class="resetButton" @click="${this.__retry}" tabindex="-1">Retry</button>
+          `
+        }
+      </div> 
     `;
   }
 
