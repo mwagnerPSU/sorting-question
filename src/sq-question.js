@@ -29,6 +29,7 @@ export class SQQuestion extends LitElement {
           border: 2px solid black;
           display: flex;
           justify-content: space-between;
+          border-radius: 5px;
         }
 
         .textArea {
@@ -38,6 +39,7 @@ export class SQQuestion extends LitElement {
         slot {
           height: 100%;
         }
+        
 
         .buttonArea {
           display: flex;

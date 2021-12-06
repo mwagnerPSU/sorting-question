@@ -17,14 +17,22 @@ export class SortingQuestion extends LitElement {
     super();
     //this.need = 'all need to succeed';
     this.title = "Gimme a title!";
-    this.checking = false;
+    this.checked = false;
     this.questionAmount = this.children.length;
     this.correctNum = 0;
     this.correctOrder = [];
+    this.currentOrder = [];
 
-    for(var i = 0; i < this.questionAmount; i++){
-      this.correctOrder.push(this.children[i]);
-    }
+    console.log(`Children: ${this.questionAmount}`);
+
+    this.querySelectorAll("sq-question").forEach(node => {
+      this.correctOrder.push(node);
+    });
+
+    console.log('correct order:');
+    console.log(this.correctOrder);
+
+    this.shuffleQuestions();
   }
 
   // properties that you wish to use as data in HTML, CSS, and the updated life-cycle
@@ -32,10 +40,10 @@ export class SortingQuestion extends LitElement {
     return {
       //need: { type: String, reflect: true },
       correctOrder: { type: Array },
+      currentOrder: { type: Array },
       title: { type: String, reflect: true },
-      checking: { type: Boolean, reflect: true },
+      checked: { type: Boolean, reflect: true },
       correctNum: { type: Number },
-      correctPos: { type: Number, reflect: false },
     };
   }
 
@@ -47,9 +55,8 @@ export class SortingQuestion extends LitElement {
       //   this.classList.add('joyful');
       // }
 
-      //not sure about this
-      if (propName === "checking") {
-        if(this.checking) {
+      if (propName === "checked") {
+        if(this.checked) {
           this.checkQuestions();
         }
       }
@@ -76,15 +83,27 @@ export class SortingQuestion extends LitElement {
     super.disconnectedCallback();
   }
 
-  __check() {
-    this.checking = true;
+  makeRandNum() {
+    const randNum = Math.floor(Math.random() * this.questionAmount);
 
-    //if statement that checks if order is right?
-
-    this.correctNum = this.checkedNum;
+    return randNum;
   }
 
-  //not sure about this
+  shuffleQuestions() {
+    this.querySelectorAll("sq-question").forEach(node => {
+      const randNum = Math.floor(Math.random() * this.questionAmount);
+
+      //gives the spot that a question is going to be placed before
+      let referenceNode = this.children[randNum];
+
+      node.parentElement.insertBefore(node, referenceNode);
+    });
+  }
+
+  __check() {
+    this.checked = true;
+  }
+
   checkQuestions() {
     let checkedNum = 0;
 
@@ -98,7 +117,7 @@ export class SortingQuestion extends LitElement {
   }
 
   __retry() {
-    this.checking = false;
+    this.checked = false;
   }
 
   // CSS - specific to Lit
@@ -150,7 +169,7 @@ export class SortingQuestion extends LitElement {
       <div class="questionArea"><slot></slot></div>
 
       <div class="checkArea">
-        ${!this.checking
+        ${!this.checked
           ? html`
             <button class="checkButton" @click="${this.__check}" tabindex='-1'>
               <simple-icon-lite icon="check"></simple-icon-lite>
