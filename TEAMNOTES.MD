@@ -59,5 +59,8 @@ What properties need mapped to HAX / the storybook? What can the user interact w
 - Next steps are to get the project together visually then put together logic behind sorting and answer checking
 - Will have at least visuals done by class tuesday, and if time allows, some logic and functionality
 ### Check-in 4
-- 
-- 
+- Our project is currently still being worked and in progress before we have time to touch it up we still have some main things to focus on 
+- Being in class and seeing what other people ask or demo's really help our group understand the next steps that we need to take in order to finish this on time and in a planned process
+- We plan to meet in person two more time to work together as a team to work through problems 
+- we tend to work a lot better in person and get a lot more done because of the accesability to look at each others screens and bounce idea's off each other 
+
