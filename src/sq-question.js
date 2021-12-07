@@ -18,6 +18,9 @@ export class SQQuestion extends LitElement {
   }
 
   //move up button
+  //could have update a property called moveup?
+  //changed property calls the function that moves the postion
+  //then removes the move up property? and do the same for movedown?
   __moveUp() {
     console.log("up clicked");
     let parent = this.parentNode;
