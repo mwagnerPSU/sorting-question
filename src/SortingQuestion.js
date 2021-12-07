@@ -25,6 +25,7 @@ export class SortingQuestion extends LitElement {
 
     console.log(`Children: ${this.questionAmount}`);
 
+    //correct order of question are stored based on sq-question input
     this.querySelectorAll("sq-question").forEach(node => {
       this.correctOrder.push(node);
     });
@@ -32,6 +33,7 @@ export class SortingQuestion extends LitElement {
     console.log('correct order:');
     console.log(this.correctOrder);
 
+    //shuffles questions upon load for user
     this.shuffleQuestions();
   }
 
@@ -83,12 +85,7 @@ export class SortingQuestion extends LitElement {
     super.disconnectedCallback();
   }
 
-  makeRandNum() {
-    const randNum = Math.floor(Math.random() * this.questionAmount);
-
-    return randNum;
-  }
-
+  //shuffles questions immediately
   shuffleQuestions() {
     this.querySelectorAll("sq-question").forEach(node => {
       const randNum = Math.floor(Math.random() * this.questionAmount);
@@ -100,22 +97,33 @@ export class SortingQuestion extends LitElement {
     });
   }
 
+  //check button
   __check() {
     this.checked = true;
   }
 
+  //checks current question correctness
   checkQuestions() {
+    //holds the amount of questions in the correct spot
     let checkedNum = 0;
 
-    for (let i = 0; i < this.questionAmount; i++) {
-      if(this.children[i].isEqualNode(this.correctOrder[i])){
+    //used to track index of the correct array below
+    let correctIndex = 0
+
+    //runs through the current spots of each question and updates the correct amount
+    document.querySelectorAll("sq-question").forEach(node => {
+      if (this.correctOrder[correctIndex] === node) {
+        //added if question is correct
         checkedNum++;
       }
-    }
-    
+      //increased to get next correct question
+      correctIndex++;
+    });
+    //sets the correct num for display use
     this.correctNum = checkedNum;
   }
 
+  //retry button
   __retry() {
     this.checked = false;
   }

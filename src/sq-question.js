@@ -17,6 +17,16 @@ export class SQQuestion extends LitElement {
   //     }
   // }
 
+  //move up button
+  __moveUp() {
+    console.log("up clicked");
+  }
+
+  //move down button
+  __moveDown() {
+    console.log("down clicked");
+  }
+
   static get styles() {
     return [
       css`
@@ -64,12 +74,12 @@ export class SQQuestion extends LitElement {
           <slot></slot>
         </div>
         <div class="buttonArea">
-          <button class="bup">
+          <button class="bup" @click="${this.__moveUp}">
             <simple-icon-lite
               icon="hardware:keyboard-arrow-up"
             ></simple-icon-lite>
           </button>
-          <button class="bdown">
+          <button class="bdown" @click="${this.__moveDown}">
             <simple-icon-lite
               icon="hardware:keyboard-arrow-down"
             ></simple-icon-lite>
