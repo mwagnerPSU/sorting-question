@@ -27,7 +27,7 @@ export class SQQuestion extends LitElement {
     if(parent.children[0] === this){
       return;
     } else{
-      parent.insertBefore(this, this.previousSibling);
+      parent.insertBefore(this, this.previousElementSibling);
     }
   }
 
@@ -35,11 +35,10 @@ export class SQQuestion extends LitElement {
   __moveDown() {
     console.log("down clicked");
     let parent = this.parentNode;
-    if(parent.children.lastElementChild === this){
-      console.log(this.parent);
+    if(parent.lastElementChild === this){
       return;
     } else{
-      parent.insertBefore(this, this.nextSibling.nextSibling);
+      parent.insertBefore(this, this.nextElementSibling.nextElementSibling);
     }
   }
 
