@@ -7,24 +7,37 @@ export class SQQuestion extends LitElement {
     return 'sq-question';
   }
 
-  // constructor() {
-  //     super();
-  // }
+  constructor() {
+      super();
+  }
 
-  // static get properties() {
-  //     return {
-  //         ...super.properties,
-  //     }
-  // }
+  static get properties() {
+      return {
+          ...super.properties,
+      }
+  }
 
   //move up button
   __moveUp() {
     console.log("up clicked");
+    let parent = this.parentNode;
+    if(parent.children[0] === this){
+      return;
+    } else{
+      parent.insertBefore(this, this.previousSibling);
+    }
   }
 
   //move down button
   __moveDown() {
     console.log("down clicked");
+    let parent = this.parentNode;
+    if(parent.children.lastElementChild === this){
+      console.log(this.parent);
+      return;
+    } else{
+      parent.insertBefore(this, this.nextSibling.nextSibling);
+    }
   }
 
   static get styles() {
