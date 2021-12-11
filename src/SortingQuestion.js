@@ -57,10 +57,33 @@ export class SortingQuestion extends LitElement {
       //   this.classList.add('joyful');
       // }
 
+      // this.querySelectorAll("sq-question").forEach(node => {
+      //   if (node === this.children[0]) {
+      //     node.setAttribute('upDisabled', true);
+      //   }else if (node === this.lastElementChild) {
+      //     node.setAttribute('downDisabled', true);
+      //   }else{
+      //     node.removeAttribute('upDisabled');
+      //     node.removeAttribute('downDisabled');
+      //   }
+      // });
+      
+     
+      //disables moving buttons when in checked state
+      //reenables when out of checked state
       if (propName === "checked") {
-        if(this.checked) {
-          this.checkQuestions();
-        }
+        this.querySelectorAll("sq-question").forEach(node => {
+          if(this.checked) {
+            
+              node.setAttribute('upDisabled', true);
+              node.setAttribute('downDisabled', true);
+            
+            this.checkQuestions();
+          }else{
+              node.removeAttribute('upDisabled');
+              node.removeAttribute('downDisabled');
+          }
+        });
       }
     });
   }
@@ -115,6 +138,9 @@ export class SortingQuestion extends LitElement {
       if (this.correctOrder[correctIndex] === node) {
         //added if question is correct
         checkedNum++;
+        node.setAttribute("correct", true);
+      }else{
+        node.setAttribute("correct", false);
       }
       //increased to get next correct question
       correctIndex++;
@@ -126,7 +152,18 @@ export class SortingQuestion extends LitElement {
   //retry button
   __retry() {
     this.checked = false;
+    document.querySelectorAll("sq-question").forEach(node => {
+      node.removeAttribute("correct");
+    });
   }
+
+  __showSolution() {
+    return;
+  }
+
+
+  //need a function that sets Attribute up disabled or down disabled on question to
+  //true or false depending on if its first or last
 
   // CSS - specific to Lit
   static get styles() {
@@ -137,11 +174,6 @@ export class SortingQuestion extends LitElement {
         padding: 10px;
         border: 1px solid gray;
       }
-
-      /* :host([need='joy']) {
-        color: yellow;
-        background-color: black;
-      } */
 
       .checkArea {
         display: flex;
@@ -166,6 +198,15 @@ export class SortingQuestion extends LitElement {
         font-size: 12pt;
         padding: 2px 10px;
       }
+
+      .solutionButton {
+        color: white;
+        background-color: #1a73d9;
+        border-radius: 20px;
+        font-size: 12pt;
+        padding: 2px 10px;
+        margin-left: 20px;
+      }
     `;
   }
 
@@ -188,6 +229,7 @@ export class SortingQuestion extends LitElement {
           : html`
             <p class="statusText">Correct: ${this.correctNum}</p>
             <button class="resetButton" @click="${this.__retry}" tabindex="-1">Retry</button>
+            <button class="solutionButton" @click="${this.__showSolution}" tabindex="-1">Show Solution</button>
           `
         }
       </div> 
