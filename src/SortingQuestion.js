@@ -15,7 +15,6 @@ export class SortingQuestion extends LitElement {
   // HTMLElement life-cycle, built in; use this for setting defaults
   constructor() {
     super();
-    //this.need = 'all need to succeed';
     this.title = "Gimme a title!";
     this.checked = false;
     this.questionAmount = this.children.length;
@@ -40,7 +39,6 @@ export class SortingQuestion extends LitElement {
   // properties that you wish to use as data in HTML, CSS, and the updated life-cycle
   static get properties() {
     return {
-      //need: { type: String, reflect: true },
       correctOrder: { type: Array },
       currentOrder: { type: Array },
       title: { type: String, reflect: true },
@@ -53,9 +51,6 @@ export class SortingQuestion extends LitElement {
   // this allows you to react to variables changing and use javascript to perform logic
   updated(changedProperties) {
     changedProperties.forEach((oldValue, propName) => {
-      // if (propName === 'need' && this[propName] === 'joy') {
-      //   this.classList.add('joyful');
-      // }
 
       // this.querySelectorAll("sq-question").forEach(node => {
       //   if (node === this.children[0]) {
