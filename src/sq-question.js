@@ -11,9 +11,12 @@ export class SQQuestion extends LitElement {
     super();
     this.backgroundColor = "";
     this.correct = false;
-    this.moved = false;
+    this.movedUp = false;
+    this.movedDown = false;
     this.upDisabled = false;
     this.downDisabled = false;
+    this.nodePlaceHolderOnUp;
+    this.nodePlaceHolderOnDown;
   }
 
   static get properties() {
@@ -21,44 +24,98 @@ export class SQQuestion extends LitElement {
         ...super.properties,
         checkColor: { type: String }, 
         correct: { type: Boolean, reflect: true },
-        // moved: { type: Boolean },
+        movedUp: { type: Boolean },
+        movedDown: { type: Boolean },
         upDisabled: { type: Boolean },
         downDisabled: { type: Boolean },
       }
   }
 
+  updated(changedProperties) {
+    changedProperties.forEach((oldValue, propName) => {
+
+      //sets or removes disabled buttons based on postion when up button clicked
+      if (propName === "movedUp") {
+        if(this.movedUp){
+          //if question is moved up from last position
+          if(this === this.parentNode.children[this.parentNode.children.length - 2]){
+            this.downDisabled = false;
+            this.nodePlaceHolderOnUp.downDisabled = true;
+          }
+          //if question is moved up from second position
+          if(this === this.parentNode.children[0]){
+            this.upDisabled = true;
+            this.nodePlaceHolderOnUp.upDisabled = false;
+          }
+          this.movedUp = false;
+        }
+      }
+
+      //removes and sets disabled for swapped first questions' up buttons
+      if (propName === "movedDown") {
+        if(this.movedDown){
+          //if question is moved down from first position
+          if(this === this.parentNode.children[1]){
+            this.upDisabled = false;
+            this.nodePlaceHolderOnDown.upDisabled = true;
+          }
+          //if question is moved down from second to last position
+          if(this === this.parentNode.children[this.parentNode.children.length - 1]){
+            this.downDisabled = true;
+            this.nodePlaceHolderOnDown.downDisabled = false
+          }
+          this.movedDown = false;
+        }
+      }
+
+      //when get out of checked state, top and bottom question buttons stay disabled
+      //correct is triggered but checked state on SortingQuestion.js
+      if (propName === "correct") {
+        if(!this.correct) {
+          //disables up button on first question from the start
+          if (this === this.parentNode.children[0]){
+            this.upDisabled = true;
+          }
+
+          if (this === this.parentNode.lastElementChild){
+            this.downDisabled = true;
+          }
+        }
+      }
+    });
+  }
+
+  // Lit life-cycle; this fires the 1st time the element is rendered on the screen
+  // this is a sign it is safe to make calls to this.shadowRoot
+  firstUpdated(changedProperties) {
+    if (super.firstUpdated) {
+      super.firstUpdated(changedProperties);
+    }
+
+    //disables up button on first question from the start
+    if (this === this.parentNode.children[0]){
+      this.upDisabled = true;
+    }
+
+    //disables down button of last question from start
+    if (this === this.parentNode.lastElementChild){
+      this.downDisabled = true;
+    }
+
+  }
+
   //move up button
   __moveUp() {
-    //enables down button incase already disbaled from being top question
-    // this.downDisabled = false;
-
-    let parent = this.parentNode;
-    if(parent.children[0] === this){
-      // this.upDisabled = true;
-      return;
-    } else{
-      parent.insertBefore(this, this.previousElementSibling);
-    }
-    // this.moved = true;
-    //setTimeout(() => {this.moved = false}, 5000);
-    // this.moved = false;
+    this.nodePlaceHolderOnUp = this.previousElementSibling;
+    this.movedUp = true;
+    this.parentNode.insertBefore(this, this.previousElementSibling);
   }
 
   //move down button
   __moveDown() {
-    //enables up button incase already disbaled from being bottom question
-    // this.upDisabled = false;
-
-    let parent = this.parentNode;
-    if(parent.lastElementChild === this){
-      // this.downDisabled = true;
-      return;
-    } else{
-      parent.insertBefore(this, this.nextElementSibling.nextElementSibling);
-    }
-    // this.moved = true;
-    //setTimeout(() => {this.moved = false}, 20000);
-    // this.moved = false;
+    this.nodePlaceHolderOnDown = this.nextElementSibling;
+    this.movedDown = true;
+    this.parentNode.insertBefore(this, this.nextElementSibling.nextElementSibling);
   }
 
   static get styles() {
