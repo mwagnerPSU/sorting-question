@@ -17,16 +17,32 @@ export class SortingQuestion extends LitElement {
     super();
     this.title = "Gimme a title!";
     this.checked = false;
+    this.solution = false;
+    this.solutionDisabled = false;
     this.questionAmount = this.children.length;
     this.correctNum = 0;
     this.correctOrder = [];
     this.currentOrder = [];
+    this.startElement;
+    // this.dragging = false;
+    this.startElement;
+    this.dropElement;
 
     console.log(`Children: ${this.questionAmount}`);
 
     //correct order of question are stored based on sq-question input
     this.querySelectorAll("sq-question").forEach(node => {
       this.correctOrder.push(node);
+
+      //dragging initialization and listeners
+      node.setAttribute("draggable", true);
+      // this.addEventListener("drag", this.drag);
+      this.addEventListener("dragstart", this.dragStart);
+      this.addEventListener("dragend", this.dragEnd);
+      this.addEventListener("dragover", this.dragOver);
+      this.addEventListener("dragenter", this.dragEnter);
+      this.addEventListener("dragleave", this.dragLeave);
+      this.addEventListener("drop", this.drop);
     });
 
     console.log('correct order:');
@@ -43,35 +59,25 @@ export class SortingQuestion extends LitElement {
       currentOrder: { type: Array },
       title: { type: String, reflect: true },
       checked: { type: Boolean, reflect: true },
+      solution: { type: Boolean, reflect: true },
+      solutionDisabled: { type: Boolean },
       correctNum: { type: Number },
+      // dragging: { type: Boolean },
     };
   }
 
   // updated fires every time a property defined above changes
   // this allows you to react to variables changing and use javascript to perform logic
   updated(changedProperties) {
-    changedProperties.forEach((oldValue, propName) => {
-
-      // this.querySelectorAll("sq-question").forEach(node => {
-      //   if (node === this.children[0]) {
-      //     node.setAttribute('upDisabled', true);
-      //   }else if (node === this.lastElementChild) {
-      //     node.setAttribute('downDisabled', true);
-      //   }else{
-      //     node.removeAttribute('upDisabled');
-      //     node.removeAttribute('downDisabled');
-      //   }
-      // });
-      
-     
+    changedProperties.forEach((oldValue, propName) => {     
       //disables moving buttons when in checked state
       //reenables when out of checked state
       if (propName === "checked") {
         this.querySelectorAll("sq-question").forEach(node => {
           if(this.checked) {
             
-              node.setAttribute('upDisabled', true);
-              node.setAttribute('downDisabled', true);
+            node.setAttribute('upDisabled', true);
+            node.setAttribute('downDisabled', true);
             
             this.checkQuestions();
           }else{
@@ -79,6 +85,21 @@ export class SortingQuestion extends LitElement {
               node.removeAttribute('downDisabled');
           }
         });
+      }
+
+      //replaces question nodes with correct order
+      //resets checked for visuals and correct num count
+      if (propName === "solution") {
+        if(this.solution){
+          for(let i = 0; i < this.questionAmount; i++){
+            let currentChild = this.children[i];
+            
+            //places correct node
+            //removes equivalent node from parent
+            currentChild.parentElement.insertBefore(this.correctOrder[i], currentChild);
+          }
+          this.checked = true;
+        }
       }
     });
   }
@@ -103,7 +124,7 @@ export class SortingQuestion extends LitElement {
     super.disconnectedCallback();
   }
 
-  //shuffles questions immediately
+  //shuffles questions
   shuffleQuestions() {
     this.querySelectorAll("sq-question").forEach(node => {
       const randNum = Math.floor(Math.random() * this.questionAmount);
@@ -147,18 +168,96 @@ export class SortingQuestion extends LitElement {
   //retry button
   __retry() {
     this.checked = false;
+    this.solution = false;
+    this.solutionDisabled = false;
     document.querySelectorAll("sq-question").forEach(node => {
       node.removeAttribute("correct");
     });
+    this.shuffleQuestions();
   }
 
   __showSolution() {
-    return;
+    this.checked = false;
+    this.solution = true;
+    //disabled solution button
+    this.solutionDisabled = true;
   }
 
+  // drag(event) {
 
-  //need a function that sets Attribute up disabled or down disabled on question to
-  //true or false depending on if its first or last
+  // }
+
+  dragStart(event) {
+    this.startElement = event.target;
+    event.target.style.opacity = .5;
+  }
+
+  //styling reset
+  dragEnd(event) {
+    event.target.style.opacity = "";
+  }
+
+  //sets border of element hovered over
+  dragEnter(event){
+    event.preventDefault();
+    event.target.style.border = "dashed 2px purple";
+  }
+
+  //allows drop
+  dragOver(event){
+    event.preventDefault();
+  }
+
+  //resets border
+  dragLeave(event){
+    event.target.style.border = "";
+  }
+
+  drop(event){
+    //sets element dropped on
+    this.dropElement = event.target;
+
+    let firstPlace = "";
+    let secondPlace = "";
+
+    //checks position of element being dragged
+    for (let i = 0; i < this.questionAmount; i++){
+      if (this.children[i] === this.startElement){
+        firstPlace = i;
+      }
+    }
+
+    //checks position of element dropped on
+    for (let i = 0; i < this.questionAmount; i++){
+      if (this.children[i] === this.dropElement){
+        secondPlace = i;
+      }
+    }
+
+    //places dragged element before or after dropped on element based on if dragged down or up
+    if(firstPlace > secondPlace) {
+      this.insertBefore(this.startElement, this.dropElement);
+      this.querySelectorAll("sq-question").forEach(node => {
+        if(node === this.startElement) {
+          node.setAttribute("draggedUp", true);
+          node.setAttribute("draggedUp", false);
+        }
+        
+      });
+    } else if (firstPlace < secondPlace) {
+      this.insertBefore(this.startElement, this.dropElement.nextElementSibling);
+      this.querySelectorAll("sq-question").forEach(node => {
+        if(node === this.startElement) {
+          node.setAttribute("draggedDown", true);
+          node.setAttribute("draggedDown", false);
+        }
+      });
+    }
+
+    
+
+    event.target.style.border = "";
+  }
 
   // CSS - specific to Lit
   static get styles() {
@@ -198,10 +297,15 @@ export class SortingQuestion extends LitElement {
         color: white;
         background-color: #1a73d9;
         border-radius: 20px;
-        font-size: 12pt;
+        font-size: 12pt; 
         padding: 2px 10px;
         margin-left: 20px;
       }
+
+      /*
+      .solutionButton([solutionDisabled]) {
+        color: green;
+      } */
     `;
   }
 
@@ -224,7 +328,7 @@ export class SortingQuestion extends LitElement {
           : html`
             <p class="statusText">Correct: ${this.correctNum}</p>
             <button class="resetButton" @click="${this.__retry}" tabindex="-1">Retry</button>
-            <button class="solutionButton" @click="${this.__showSolution}" tabindex="-1">Show Solution</button>
+            <button class="solutionButton" @click="${this.__showSolution}" ?disabled="${this.solutionDisabled}" tabindex="-1">Show Solution</button>
           `
         }
       </div> 
