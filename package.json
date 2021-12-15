@@ -1,8 +1,8 @@
 {
-  "name": "@lrnwebcomponents/rename-me",
-  "description": "HAX Capable web component to build a better future",
+  "name": "@lrnwebcomponents/sorting-question",
+  "description": "Interactive module to test ability of sorting any list of statements/numbers inputted.",
   "license": "Apache-2.0",
-  "author": "btopro",
+  "author": "Mike Wagner",
   "version": "0.0.1",
   "repository": {
     "type": "git",
