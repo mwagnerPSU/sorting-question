@@ -9,7 +9,6 @@ export class SQQuestion extends LitElement {
 
   constructor() {
     super();
-    this.backgroundColor = "";
     this.correct = false;
     this.movedUp = false;
     this.movedDown = false;
@@ -17,23 +16,6 @@ export class SQQuestion extends LitElement {
     this.downDisabled = false;
     this.nodePlaceHolderOnUp;
     this.nodePlaceHolderOnDown;
-    // this.draggedUp = false;
-    // this.draggedDown = false;
-
-    //dragging stuff
-    // this.startElement;
-    // this.dropElement;
-    
-    // this.setAttribute("draggable", true);
-    // this.setAttribute("ondragstart", "event.dataTransfer.setData('application/x-moz-node',null)");
-    // this.addEventListener("drag", this.drag);
-    // this.addEventListener("dragstart", this.dragStart);
-    // this.addEventListener("dragend", this.dragEnd);
-    // this.addEventListener("dragover", this.dragOver);
-    // this.addEventListener("dragenter", this.dragEnter);
-    // this.addEventListener("dragleave", this.dragLeave);
-    // this.addEventListener("drop", this.drop);
-
   }
 
   static get properties() {
@@ -47,9 +29,6 @@ export class SQQuestion extends LitElement {
         downDisabled: { type: Boolean },
         draggedUp: { type: Boolean },
         draggedDown: { type: Boolean },
-
-        // startElement: { type: Node },
-        // dropElement: { type: Node },
       }
   }
 
@@ -157,7 +136,6 @@ export class SQQuestion extends LitElement {
     if (this === this.parentNode.lastElementChild){
       this.downDisabled = true;
     }
-
   }
 
   //move up button
@@ -195,10 +173,11 @@ export class SQQuestion extends LitElement {
         }
 
         .container {
-          border: 2px solid black;
+          border: 2px solid gray;
           display: flex;
           justify-content: space-between;
           border-radius: 5px;
+          box-shadow: 1.5px 1.5px 1px gray;
         }
 
         .textArea {
@@ -220,6 +199,7 @@ export class SQQuestion extends LitElement {
         button {
           height: 100%;
           margin: 2%;
+          box-shadow: 1px 1px 1px gray;
         }
       `,
     ];

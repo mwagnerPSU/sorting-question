@@ -24,19 +24,16 @@ export class SortingQuestion extends LitElement {
     this.correctOrder = [];
     this.currentOrder = [];
     this.startElement;
-    // this.dragging = false;
-    this.startElement;
     this.dropElement;
 
-    console.log(`Children: ${this.questionAmount}`);
 
     //correct order of question are stored based on sq-question input
+    //sets listeners
     this.querySelectorAll("sq-question").forEach(node => {
       this.correctOrder.push(node);
 
       //dragging initialization and listeners
       node.setAttribute("draggable", true);
-      // this.addEventListener("drag", this.drag);
       this.addEventListener("dragstart", this.dragStart);
       this.addEventListener("dragend", this.dragEnd);
       this.addEventListener("dragover", this.dragOver);
@@ -44,10 +41,6 @@ export class SortingQuestion extends LitElement {
       this.addEventListener("dragleave", this.dragLeave);
       this.addEventListener("drop", this.drop);
     });
-
-    console.log('correct order:');
-    console.log(this.correctOrder);
-
     //shuffles questions upon load for user
     this.shuffleQuestions();
   }
@@ -62,7 +55,6 @@ export class SortingQuestion extends LitElement {
       solution: { type: Boolean, reflect: true },
       solutionDisabled: { type: Boolean },
       correctNum: { type: Number },
-      // dragging: { type: Boolean },
     };
   }
 
@@ -183,10 +175,6 @@ export class SortingQuestion extends LitElement {
     this.solutionDisabled = true;
   }
 
-  // drag(event) {
-
-  // }
-
   dragStart(event) {
     this.startElement = event.target;
     event.target.style.opacity = .5;
@@ -253,9 +241,6 @@ export class SortingQuestion extends LitElement {
         }
       });
     }
-
-    
-
     event.target.style.border = "";
   }
 
@@ -266,7 +251,15 @@ export class SortingQuestion extends LitElement {
         display: block;
         width: 700px;
         padding: 10px;
-        border: 1px solid gray;
+        border: 3px solid gray;
+      }
+
+      h2 {
+        color: #000080;
+      }
+
+      .questionArea{
+        color: #000080;
       }
 
       .checkArea {
@@ -276,19 +269,20 @@ export class SortingQuestion extends LitElement {
       .checkButton {
         color: white;
         background-color: #1a73d9;
-        border-radius: 20px;
+        border-radius: 5px;
         font-size: 12pt;
         padding: 2px 10px;
       }
 
       .statusText {
         margin-right: 20px;
+        font-size: 14pt;
       }
 
       .resetButton {
         color: white;
         background-color: #1a73d9;
-        border-radius: 20px;
+        border-radius: 5px;
         font-size: 12pt;
         padding: 2px 10px;
       }
@@ -296,16 +290,15 @@ export class SortingQuestion extends LitElement {
       .solutionButton {
         color: white;
         background-color: #1a73d9;
-        border-radius: 20px;
+        border-radius: 5px;
         font-size: 12pt; 
         padding: 2px 10px;
         margin-left: 20px;
       }
 
-      /*
-      .solutionButton([solutionDisabled]) {
-        color: green;
-      } */
+      button {
+        box-shadow: 1px 1px 1px gray;
+      }
     `;
   }
 
