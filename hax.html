@@ -38,7 +38,7 @@
   <script src="../../../node_modules/@lrnwebcomponents/deduping-fix/deduping-fix.js"></script>
   <script src="../../../node_modules/web-animations-js/web-animations-next-lite.min.js"></script>
   <script type="module">
-    import '../rename-me.js';
+    import '../src/SortingQuestion.js';
     import "@lrnwebcomponents/h-a-x/h-a-x.js";
     import("@polymer/polymer/lib/utils/settings.js").then((esModule) => {
       esModule.setPassiveTouchGestures(true);
@@ -52,10 +52,15 @@
     <li><a href="#" disabled>HAX, card demo</a></li>
   </ul>
   <div class="hax-wrapper">
-    <h-a-x app-store='{"url": "assets/appstore.json"}' element-align="right">
-      <p data-hax-grid="" role="textbox">Stuff and thigns</p>
-      <p data-hax-grid="" role="textbox">Another block of text below that</p>
+    <sorting-question title="Sorting Question">
+      <sq-question>Question 1</sq-question>
+      <sq-question>Question 2</sq-question>
+      <sq-question>Question 3</sq-question>
+      <sq-question>Question 4</sq-question>
+      <sq-question>Question 5</sq-question>
+    </sorting-question>    
 
+    <h-a-x app-store='{"url": "assets/appstore.json"}' element-align="right">
       <grid-plate data-hax-grid="" layout="1-1-1" responsive-size="sm" role="textbox" breakpoint-sm="900" breakpoint-md="1200" breakpoint-lg="1500" breakpoint-xl="1800" disable-responsive="">
         
         <retro-card role="textbox" title="hax" url="https://haxtheweb.org/" subtitle="The future of content authoring" tags="bright, amazing, innovative, new, fun, a requirement to complete this course" slot="col-1" accent-color="indigo" dark=""></retro-card>
@@ -97,10 +102,6 @@
       
       
       </grid-plate>
-      
-      
-      <rename-me value="This is editable" need="all need to succeed"></rename-me>
-      
       
       <p data-hax-grid="">Cool stuff. Let's write about spongebob!</p>
       

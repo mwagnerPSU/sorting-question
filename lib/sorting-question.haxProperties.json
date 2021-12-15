@@ -4,8 +4,8 @@
     "canEditSource": true,
     "contentEditable": true,
     "gizmo": {
-      "title": "Rename me",
-      "description": "An element to improve the future of education",
+      "title": "Sorting Question",
+      "description": "Interactive module to test ability of sorting any list of statements/numbers inputted.",
       "icon": "credit-card",
       "color": "blue",
       "groups": ["Content", "Education"]
@@ -13,9 +13,9 @@
     "settings": {
       "configure": [
         {
-          "property": "need",
-          "title": "Need",
-          "description": "What we all need",
+          "property": "title",
+          "title": "Title",
+          "description": "Title of module to be used",
           "inputMethod": "textfield"
         }
       ],
@@ -24,11 +24,11 @@
     },
     "demoSchema": [
       {
-        "tag": "rename-me",
+        "tag": "sorting-question",
         "properties": {
-            "need": "the future"
+          "title": "title"
         },
-        "content": "<p>Some internal slotted content</p>"
+        "content": "<sq-question>Add more of me!</sq-question>"
       }
     ]
   }
