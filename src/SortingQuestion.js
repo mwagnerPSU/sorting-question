@@ -15,7 +15,7 @@ export class SortingQuestion extends LitElement {
   // HTMLElement life-cycle, built in; use this for setting defaults
   constructor() {
     super();
-    this.title = "Gimme a title!";
+    this.title = "title";
     this.checked = false;
     this.solution = false;
     this.solutionDisabled = false;
@@ -155,6 +155,18 @@ export class SortingQuestion extends LitElement {
     });
     //sets the correct num for display use
     this.correctNum = checkedNum;
+
+    //shoots confetti if all are correct
+    if (this.correctNum === this.children.length) {
+      // all credit to:
+      // confetti-element by stefanjudis MIT
+      // cleaned up for production use by lrnwebcomponents team
+      import("../lib/confetti-container.js").then((module) => {
+        setTimeout(() => {
+          this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
+        }, 0);
+      });
+    }
   }
 
   //retry button
@@ -305,26 +317,28 @@ export class SortingQuestion extends LitElement {
   // HTML - specific to Lit
   render() {
     return html`
-      <h2>${this.title}</h2>
+      <confetti-container id="confetti">
+        <h2>${this.title}</h2>
 
-      <div class="questionArea"><slot></slot></div>
+        <div class="questionArea"><slot></slot></div>
 
-      <div class="checkArea">
-        ${!this.checked
-          ? html`
-            <button class="checkButton" @click="${this.__check}" tabindex='-1'>
-              <simple-icon-lite icon="check"></simple-icon-lite>
+        <div class="checkArea">
+          ${!this.checked
+            ? html`
+              <button class="checkButton" @click="${this.__check}" tabindex='-1'>
+                <simple-icon-lite icon="check"></simple-icon-lite>
 
-              Check
-            </button>
-          `
-          : html`
-            <p class="statusText">Correct: ${this.correctNum}</p>
-            <button class="resetButton" @click="${this.__retry}" tabindex="-1">Retry</button>
-            <button class="solutionButton" @click="${this.__showSolution}" ?disabled="${this.solutionDisabled}" tabindex="-1">Show Solution</button>
-          `
-        }
-      </div> 
+                Check
+              </button>
+            `
+            : html`
+              <p class="statusText">Correct: ${this.correctNum}</p>
+              <button class="resetButton" @click="${this.__retry}" tabindex="-1">Retry</button>
+              <button class="solutionButton" @click="${this.__showSolution}" ?disabled="${this.solutionDisabled}" tabindex="-1">Show Solution</button>
+            `
+          }
+        </div> 
+      </confetti-container>
     `;
   }
 
