@@ -77,7 +77,18 @@ export class SortingQuestion extends LitElement {
               node.removeAttribute('downDisabled');
           }
         });
+
+        if(this.checked){
+          this.querySelectorAll("sq-question").forEach(node => {
+            node.removeAttribute("draggable");
+          });
+        }else{
+          this.querySelectorAll("sq-question").forEach(node => {
+            node.setAttribute("draggable", true);
+          });
+        }
       }
+        
 
       //replaces question nodes with correct order
       //resets checked for visuals and correct num count
