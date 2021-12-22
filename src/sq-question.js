@@ -126,16 +126,6 @@ export class SQQuestion extends LitElement {
     if (super.firstUpdated) {
       super.firstUpdated(changedProperties);
     }
-
-    //disables up button on first question from the start
-    if (this === this.parentNode.children[0]){
-      this.upDisabled = true;
-    }
-
-    //disables down button of last question from start
-    if (this === this.parentNode.lastElementChild){
-      this.downDisabled = true;
-    }
   }
 
   //move up button
