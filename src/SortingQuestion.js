@@ -27,22 +27,22 @@ export class SortingQuestion extends LitElement {
     this.dropElement;
 
 
-    //correct order of question are stored based on sq-question input
-    //sets listeners
-    this.querySelectorAll("sq-question").forEach(node => {
-      this.correctOrder.push(node);
+    // //correct order of question are stored based on sq-question input
+    // //sets listeners
+    // this.querySelectorAll("sq-question").forEach(node => {
+    //   this.correctOrder.push(node);
 
-      //dragging initialization and listeners
-      node.setAttribute("draggable", true);
-      this.addEventListener("dragstart", this.dragStart);
-      this.addEventListener("dragend", this.dragEnd);
-      this.addEventListener("dragover", this.dragOver);
-      this.addEventListener("dragenter", this.dragEnter);
-      this.addEventListener("dragleave", this.dragLeave);
-      this.addEventListener("drop", this.drop);
-    });
-    //shuffles questions upon load for user
-    this.shuffleQuestions();
+    //   //dragging initialization and listeners
+    //   node.setAttribute("draggable", true);
+    //   this.addEventListener("dragstart", this.dragStart);
+    //   this.addEventListener("dragend", this.dragEnd);
+    //   this.addEventListener("dragover", this.dragOver);
+    //   this.addEventListener("dragenter", this.dragEnter);
+    //   this.addEventListener("dragleave", this.dragLeave);
+    //   this.addEventListener("drop", this.drop);
+    // });
+    // //shuffles questions upon load for user
+    // this.shuffleQuestions();
   }
 
   // properties that you wish to use as data in HTML, CSS, and the updated life-cycle
@@ -113,6 +113,23 @@ export class SortingQuestion extends LitElement {
     if (super.firstUpdated) {
       super.firstUpdated(changedProperties);
     }
+
+    //correct order of question are stored based on sq-question input
+    //sets listeners
+    this.querySelectorAll("sq-question").forEach(node => {
+      this.correctOrder.push(node);
+
+      //dragging initialization and listeners
+      node.setAttribute("draggable", true);
+      this.addEventListener("dragstart", this.dragStart);
+      this.addEventListener("dragend", this.dragEnd);
+      this.addEventListener("dragover", this.dragOver);
+      this.addEventListener("dragenter", this.dragEnter);
+      this.addEventListener("dragleave", this.dragLeave);
+      this.addEventListener("drop", this.drop);
+    });
+    //shuffles questions upon load for user
+    this.shuffleQuestions();
   }
 
   // HTMLElement life-cycle, element has been connected to the page / added or moved
