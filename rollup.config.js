@@ -7,85 +7,67 @@ import { generateSW } from 'rollup-plugin-workbox';
 import path from 'path';
 
 export default {
-  input: 'index.html',
-  output: {
-    entryFileNames: '[hash].js',
-    chunkFileNames: '[hash].js',
-    assetFileNames: '[hash][extname]',
-    format: 'es',
-    dir: 'dist',
-  },
-  preserveEntrySignatures: false,
-
-  plugins: [
-    /** Enable using HTML as rollup entrypoint */
-    html({
-      minify: true,
-      transformHtml: [
-        htmlHackyThing =>
-          htmlHackyThing.replace(
-            '<base href="/">',
-            '<base href="/project-3/">'
-          ),
-      ],
-      injectServiceWorker: true,
-      serviceWorkerPath: 'dist/sw.js',
-    }),
-    /** Resolve bare module imports */
-    nodeResolve(),
-    /** Minify JS */
-    terser(),
-    /** Bundle assets references via import.meta.url */
-    importMetaAssets({
-      warnOnError: true,
-    }),
-    /** Compile JS to a lower language target */
-    babel({
-      babelHelpers: 'bundled',
-      presets: [
-        [
-          require.resolve('@babel/preset-env'),
-          {
-            targets: [
-              'last 3 Chrome major versions',
-              'last 3 Firefox major versions',
-              'last 3 Edge major versions',
-              'last 3 Safari major versions',
+	input: 'index.html',
+	output: [
+		{
+			format: 'es',
+            dir: 'dist'
+		}
+	],
+    plugins: [
+        html({
+            minify: true,
+            injectServiceWorker: process.env.VERCEL_ENV == "development" ? false : true,
+            serviceWorkerPath: 'dist/sw.js',
+        }),
+        nodeResolve(),
+        terser(),
+        importMetaAssets(),
+        babel({
+            babelHelpers: 'bundled',
+            presets: [
+              [
+                require.resolve('@babel/preset-env'),
+                {
+                  targets: [
+                    'last 3 Chrome major versions',
+                    'last 3 Firefox major versions',
+                    'last 3 Edge major versions',
+                    'last 3 Safari major versions',
+                  ],
+                  modules: false,
+                  bugfixes: true,
+                },
+              ],
             ],
-            modules: false,
-            bugfixes: true,
-          },
-        ],
-      ],
-      plugins: [
-        [
-          require.resolve('babel-plugin-template-html-minifier'),
-          {
-            modules: { lit: ['html', { name: 'css', encapsulation: 'style' }] },
-            failOnError: false,
-            strictCSS: true,
-            htmlMinifier: {
-              collapseWhitespace: true,
-              conservativeCollapse: true,
-              removeComments: true,
-              caseSensitive: true,
-              minifyCSS: true,
-            },
-          },
-        ],
-      ],
-    }),
-    /** Create and inject a service worker */
-    generateSW({
-      navigateFallback: '/index.html',
-      // where to output the generated sw
-      swDest: path.join('dist', 'sw.js'),
-      // directory to match patterns against to be precached
-      globDirectory: path.join('dist'),
-      // cache any html js and css by default
-      globPatterns: ['**/*.{html,js,css,webmanifest}'],
-      skipWaiting: true,
-      clientsClaim: true,
-    }),
-  ],
+            plugins: [
+              [
+                require.resolve('babel-plugin-template-html-minifier'),
+                {
+                  modules: { lit: ['html', { name: 'css', encapsulation: 'style' }] },
+                  failOnError: false,
+                  strictCSS: true,
+                  htmlMinifier: {
+                    collapseWhitespace: true,
+                    conservativeCollapse: true,
+                    removeComments: true,
+                    caseSensitive: true,
+                    minifyCSS: true,
+                  },
+                },
+              ],
+            ],
+          }),
+          generateSW({
+            navigateFallback: '/index.html',
+            // where to output the generated sw
+            swDest: path.join('dist', 'sw.js'),
+            // directory to match patterns against to be precached
+            globDirectory: path.join('dist'),
+            // cache any html js and css by default
+            globPatterns: ['**/*.{html,js,css,webmanifest}'],
+            skipWaiting: true,
+            clientsClaim: true,
+          }),
+    ]
 };
