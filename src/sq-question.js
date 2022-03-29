@@ -158,9 +158,9 @@ export class SQQuestion extends LitElement {
           background-color: salmon;
         }
 
-        :host([!correct]) {
+        /* :host([!correct]) {
           background-color: white;
-        }
+        } */
 
         .container {
           border: 2px solid gray;

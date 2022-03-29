@@ -1794,6 +1794,11 @@
   resolved "https://registry.yarnpkg.com/@lit/reactive-element/-/reactive-element-1.0.1.tgz#853cacd4d78d79059f33f66f8e7b0e5c34bee294"
   integrity sha512-nSD5AA2AZkKuXuvGs8IK7K5ZczLAogfDd26zT9l6S7WzvqALdVWcW5vMUiTnZyj5SPcNwNNANj0koeV1ieqTFQ==
 
+"@lit/reactive-element@^1.3.0":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@lit/reactive-element/-/reactive-element-1.3.1.tgz#3021ad0fa30a75a41212c5e7f1f169c5762ef8bb"
+  integrity sha512-nOJARIr3pReqK3hfFCSW2Zg/kFcFsSAlIE7z4a0C9D2dPrgD/YSn3ZP2ET/rxKB65SXyG7jJbkynBRm+tGlacw==
+
 "@lrnwebcomponents/a11y-behaviors@^4.0.4":
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/@lrnwebcomponents/a11y-behaviors/-/a11y-behaviors-4.0.4.tgz#96382406f69cff4f27c8694a7bb162421b34ce32"
@@ -1821,6 +1826,13 @@
     "@lrnwebcomponents/simple-icon" "^4.0.4"
     "@lrnwebcomponents/simple-tooltip" "^4.0.1"
     lit "2.0.0"
+
+"@lrnwebcomponents/a11y-utils@^4.0.20":
+  version "4.0.20"
+  resolved "https://registry.yarnpkg.com/@lrnwebcomponents/a11y-utils/-/a11y-utils-4.0.20.tgz#221719faca7e3c0de700be4324bfdecb1c9a6f0f"
+  integrity sha512-IxKTtj/5yQsNciaYnnsPnqYqXr4xRefLXAzS+jBmF5BkC+RYmeZEKecE08mJpADc/rARpQdWnzTEqWTPVUqfWw==
+  dependencies:
+    lit "^2.2.0"
 
 "@lrnwebcomponents/absolute-position-behavior@^4.0.4":
   version "4.0.4"
@@ -2149,6 +2161,13 @@
   dependencies:
     lit "2.0.0"
 
+"@lrnwebcomponents/simple-colors-shared-styles@^4.0.20":
+  version "4.0.20"
+  resolved "https://registry.yarnpkg.com/@lrnwebcomponents/simple-colors-shared-styles/-/simple-colors-shared-styles-4.0.20.tgz#cb9904e6738890bba863b8f28e998f2112dfd2b7"
+  integrity sha512-qtOYt0ILgNuGHlXJCb18eNOHhgBRZYOOjhMbDt5AoM6KcIzltbL3Y9M17bCjs7aRJCpF+7SjUApPtYzPYnCBnQ==
+  dependencies:
+    lit "^2.2.0"
+
 "@lrnwebcomponents/simple-colors@^2.8.0":
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/@lrnwebcomponents/simple-colors/-/simple-colors-2.8.0.tgz#470a1dd5c77beb0e9c1d552acfbf290a4f03fa73"
@@ -2158,6 +2177,16 @@
     "@lrnwebcomponents/simple-picker" "^2.8.0"
     "@polymer/polymer" "^3.3.1"
     lit-element "2.4.0"
+
+"@lrnwebcomponents/simple-colors@^4.0.20":
+  version "4.0.20"
+  resolved "https://registry.yarnpkg.com/@lrnwebcomponents/simple-colors/-/simple-colors-4.0.20.tgz#a7724fdfce9cecbdbce989d2ecc1112c85341991"
+  integrity sha512-UMb9RBqGR1uAqMK7VUtxOr8n8k8z20QRkAkgeNPkoe9BhLUV14aeL7ctn9oDS1qvDJyQx4goVLlF3tIDDYhfoA==
+  dependencies:
+    "@lrnwebcomponents/a11y-utils" "^4.0.20"
+    "@lrnwebcomponents/simple-colors-shared-styles" "^4.0.20"
+    "@lrnwebcomponents/simple-picker" "^4.0.20"
+    lit "^2.2.0"
 
 "@lrnwebcomponents/simple-colors@^4.0.4":
   version "4.0.4"
@@ -2204,14 +2233,6 @@
     "@lrnwebcomponents/simple-picker" "^4.0.4"
     lit "2.0.0"
 
-"@lrnwebcomponents/simple-icon@4.0.4", "@lrnwebcomponents/simple-icon@^4.0.4":
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/@lrnwebcomponents/simple-icon/-/simple-icon-4.0.4.tgz#4e16b73d0b9bd81440c98c70f5e2a2e8447971e8"
-  integrity sha512-u0RpezEZHNkAHZwne++Cf5kZs0k/q0BFuSyGLpbzs98qRfZn281L5MlKoQfgqE8Or5ynfylQIMtqekX1v3sd3Q==
-  dependencies:
-    "@lrnwebcomponents/simple-colors" "^4.0.4"
-    lit "2.0.0"
-
 "@lrnwebcomponents/simple-icon@^2.8.0":
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/@lrnwebcomponents/simple-icon/-/simple-icon-2.8.0.tgz#ccb8055b32070e9e1ac5fe2d57bb1f9db362ff61"
@@ -2219,6 +2240,23 @@
   dependencies:
     "@lrnwebcomponents/simple-colors" "^2.8.0"
     lit-element "2.4.0"
+
+"@lrnwebcomponents/simple-icon@^4.0.20":
+  version "4.0.20"
+  resolved "https://registry.yarnpkg.com/@lrnwebcomponents/simple-icon/-/simple-icon-4.0.20.tgz#3458bd2f89b5d63c82b9cc691b0761d8b5b66e1a"
+  integrity sha512-deaE3/Afyy4OT7zbCmvg/XuMe8i071TqyPKvHcaYjSNFp9CmU/gtnbV0Mo6ZVIugQfU19jCeqZFYu9t5MIHRSg==
+  dependencies:
+    "@lrnwebcomponents/simple-colors" "^4.0.20"
+    flag-icon-css "4.1.7"
+    lit "^2.2.0"
+
+"@lrnwebcomponents/simple-icon@^4.0.4":
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/@lrnwebcomponents/simple-icon/-/simple-icon-4.0.4.tgz#4e16b73d0b9bd81440c98c70f5e2a2e8447971e8"
+  integrity sha512-u0RpezEZHNkAHZwne++Cf5kZs0k/q0BFuSyGLpbzs98qRfZn281L5MlKoQfgqE8Or5ynfylQIMtqekX1v3sd3Q==
+  dependencies:
+    "@lrnwebcomponents/simple-colors" "^4.0.4"
+    lit "2.0.0"
 
 "@lrnwebcomponents/simple-login@^4.0.4":
   version "4.0.4"
@@ -2250,6 +2288,14 @@
   dependencies:
     "@lrnwebcomponents/simple-icon" "^2.8.0"
     lit-element "2.4.0"
+
+"@lrnwebcomponents/simple-picker@^4.0.20":
+  version "4.0.20"
+  resolved "https://registry.yarnpkg.com/@lrnwebcomponents/simple-picker/-/simple-picker-4.0.20.tgz#aff4a33108814a4ef966e3896bf2da7b1a8fb630"
+  integrity sha512-PFWMWTLBrBi9Q2/59LX4PWft/fKZb5aP9AN0J1Im6Yv7bYOsz3AjIuoHmUsqgDLcs8b0HvlmjY10EfzT5rb5Ng==
+  dependencies:
+    "@lrnwebcomponents/simple-icon" "^4.0.20"
+    lit "^2.2.0"
 
 "@lrnwebcomponents/simple-picker@^4.0.4":
   version "4.0.4"
@@ -4845,6 +4891,11 @@ find-versions@^4.0.0:
   dependencies:
     semver-regex "^3.1.2"
 
+flag-icon-css@4.1.7:
+  version "4.1.7"
+  resolved "https://registry.yarnpkg.com/flag-icon-css/-/flag-icon-css-4.1.7.tgz#5471197f9ab965a3603b3e0face31dd513fec289"
+  integrity sha512-AFjSU+fv98XbU0vnTQ32vcLj89UEr1MhwDFcooQv14qWJCjg9fGZzfh9BVyDhAhIOZW/pGmJmq38RqpgPaeybQ==
+
 flat-cache@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-3.0.4.tgz#61b0338302b2fe9f957dcc32fc2a87f1c3048b11"
@@ -5899,6 +5950,14 @@ lit-element@^3.0.0:
     "@lit/reactive-element" "^1.0.0"
     lit-html "^2.0.0"
 
+lit-element@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/lit-element/-/lit-element-3.2.0.tgz#9c981c55dfd9a8f124dc863edb62cc529d434db7"
+  integrity sha512-HbE7yt2SnUtg5DCrWt028oaU4D5F4k/1cntAFHTkzY8ZIa8N0Wmu92PxSxucsQSOXlODFrICkQ5x/tEshKi13g==
+  dependencies:
+    "@lit/reactive-element" "^1.3.0"
+    lit-html "^2.2.0"
+
 lit-html@^1.1.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-1.4.1.tgz#0c6f3ee4ad4eb610a49831787f0478ad8e9ae5e0"
@@ -5908,6 +5967,13 @@ lit-html@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-2.0.1.tgz#63241015efa07bc9259b6f96f04abd052d2a1f95"
   integrity sha512-KF5znvFdXbxTYM/GjpdOOnMsjgRcFGusTnB54ixnCTya5zUR0XqrDRj29ybuLS+jLXv1jji6Y8+g4W7WP8uL4w==
+  dependencies:
+    "@types/trusted-types" "^2.0.2"
+
+lit-html@^2.2.0:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-2.2.1.tgz#762f112a8b54eaf0bbae3f516de935a25dcc12d1"
+  integrity sha512-AiJ/Rs0awjICs2FioTnHSh+Np5dhYSkyRczKy3wKjp8qjLhr1Ov+GiHrUQNdX8ou1LMuznpIME990AZsa/tR8g==
   dependencies:
     "@types/trusted-types" "^2.0.2"
 
@@ -5928,6 +5994,15 @@ lit@2.0.2, lit@^2.0.0, lit@^2.0.0-rc.2, lit@^2.0.2:
     "@lit/reactive-element" "^1.0.0"
     lit-element "^3.0.0"
     lit-html "^2.0.0"
+
+lit@^2.2.0:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/lit/-/lit-2.2.1.tgz#4b679e1d8cb6c7977b64921b1ea3eca7850ca1dd"
+  integrity sha512-dSe++R50JqrvNGXmI9OE13de1z5U/Y3J2dTm/9GC86vedI8ILoR8ZGnxfThFpvQ9m0lR0qRnIR4IiKj/jDCfYw==
+  dependencies:
+    "@lit/reactive-element" "^1.3.0"
+    lit-element "^3.2.0"
+    lit-html "^2.2.0"
 
 locate-path@^2.0.0:
   version "2.0.0"
