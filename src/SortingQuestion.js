@@ -153,7 +153,7 @@ export class SortingQuestion extends LitElement {
     let correctIndex = 0
 
     //runs through the current spots of each question and updates the correct amount
-    document.querySelectorAll("sq-question").forEach(node => {
+    this.querySelectorAll("sq-question").forEach(node => {
       if (this.correctOrder[correctIndex] === node) {
         //added if question is correct
         checkedNum++;
@@ -337,7 +337,7 @@ export class SortingQuestion extends LitElement {
           ${!this.checked
             ? html`
               <button class="checkButton" @click="${this.__check}" tabindex='-1'>
-                <simple-icon-lite icon="check"></simple-icon-lite>
+                <!-- <simple-icon-lite icon="check"></simple-icon-lite> -->
 
                 Check
               </button>
