@@ -203,14 +203,18 @@ export class SQQuestion extends LitElement {
         </div>
         <div class="buttonArea">
           <button class="bup" ?disabled="${this.upDisabled}" @click="${this.__moveUp}">
-            <simple-icon-lite
+            <!--<simple-icon-lite
               icon="hardware:keyboard-arrow-up"
-            ></simple-icon-lite>
+            ></simple-icon-lite>-->
+
+            <img src="https://img.icons8.com/material-sharp/1x/collapse-arrow.png" />
           </button>
           <button class="bdown" ?disabled="${this.downDisabled}" @click="${this.__moveDown}">
-            <simple-icon-lite
+            <!--<simple-icon-lite
               icon="hardware:keyboard-arrow-down"
-            ></simple-icon-lite>
+            ></simple-icon-lite>-->
+
+            <img src="https://img.icons8.com/material-sharp/1x/expand-arrow.png" />
           </button>
         </div>
       </div>

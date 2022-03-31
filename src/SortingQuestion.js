@@ -297,6 +297,10 @@ export class SortingQuestion extends LitElement {
         padding: 2px 10px;
       }
 
+      .checkmark {
+        padding-top: 5px;
+      }
+
       .statusText {
         margin-right: 20px;
         font-size: 14pt;
@@ -338,7 +342,7 @@ export class SortingQuestion extends LitElement {
             ? html`
               <button class="checkButton" @click="${this.__check}" tabindex='-1'>
                 <!-- <simple-icon-lite icon="check"></simple-icon-lite> -->
-
+                <img class="checkmark" src="https://img.icons8.com/material-outlined/0.6x/checked.png" />
                 Check
               </button>
             `
