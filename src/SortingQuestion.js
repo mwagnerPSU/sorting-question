@@ -185,7 +185,7 @@ export class SortingQuestion extends LitElement {
     this.checked = false;
     this.solution = false;
     this.solutionDisabled = false;
-    document.querySelectorAll("sq-question").forEach(node => {
+    this.querySelectorAll("sq-question").forEach(node => {
       node.removeAttribute("correct");
     });
     this.shuffleQuestions();
