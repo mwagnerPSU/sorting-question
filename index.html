@@ -21,6 +21,18 @@
     sorting-question {
       margin: 15px;
     }
+
+    .titleArea {
+      margin: 15px;
+    }
+
+    .inputArea {
+      margin: 15px;
+    }
+
+    .buttonArea {
+      margin: 15px;
+    }
   </style>
   <title>Haley Sorting Question</title>
 </head>
@@ -29,6 +41,105 @@
   <script type="module">
     import "./src/SortingQuestion.js";
   </script>
+
+  <!-- <script type="module">
+    import { html, render } from 'lit';
+    import "./src/sq-question.js";
+
+    const inputsArea = document.querySelector('.inputsArea');
+    const questionArea = document.querySelector('.questionArea');
+    const sortquestion = document.querySelector('sorting-question');
+
+    function addInput() {
+      console.log('clicked');
+    }
+
+    function removeInput() {
+      console.log('clicked');
+    }
+
+    function create() {
+      console.log('clicked');
+
+      let inputs = document.querySelector('.inputArea').querySelectorAll('input');
+    
+      inputs.forEach(input => {
+        console.log(input.value);
+      });
+
+      let newSort = document.createElement('sorting-question');
+
+      let newQuestion = document.createElement('sq-question');
+      let newQuestionText = document.createTextNode(inputs[0].value);
+      newQuestion.appendChild(newQuestionText);
+
+      let newQuestion2 = document.createElement('sq-question');
+      let newQuestionText2 = document.createTextNode(inputs[1].value);
+      newQuestion2.appendChild(newQuestionText2);
+
+      let newQuestion3 = document.createElement('sq-question');
+      let newQuestionText3 = document.createTextNode(inputs[2].value);
+      newQuestion3.appendChild(newQuestionText3);
+
+      newSort.appendChild(newQuestion);
+      newSort.appendChild(newQuestion2);
+      newSort.appendChild(newQuestion3);
+
+      
+
+      // sortquestion.appendChild(); 
+      // `<sq-question>${inputs[0].value}</sq-question>
+      // <sq-question>${inputs[1].value}</sq-question>
+      // <sq-question>${inputs[2].value}</sq-question>`;
+
+
+
+      render(
+        html`
+          <div class="here"></div>
+        `,
+        questionArea
+      )
+
+      const here = document.querySelector('.here');
+      here.appendChild(newSort);
+      
+    }
+
+    render(
+      html`
+        <div class="titleArea">
+          <label for="title">Enter a Title:</label>
+          <input class="title" type="text" />
+        </div>
+
+        <div class="inputArea">
+          <label for="input1">Question 1:</label>
+          <input class="input1" type="text" />
+
+          <label for="input2">Question 2:</label>
+          <input class="input2" type="text" />
+
+          <label for="input3">Question 3:</label>
+          <input class="input3" type="text" />
+        </div>
+
+        <div class="buttonArea">
+          <button @click='${addInput}'>Add</button>
+          <button @click='${removeInput}'>Remove</button>
+          <button @click='${create}'>Create</button>
+        </div>
+      `,
+      inputsArea
+    );
+  </script>
+
+
+
+  <div class="content">
+    <div class="inputsArea"></div>
+    <div class="questionArea"></div>
+  </div> -->
 
   <sorting-question title="My morning routine">
     <sq-question>First, I wake up at 7:30 am</sq-question>

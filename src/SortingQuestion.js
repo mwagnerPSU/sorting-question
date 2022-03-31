@@ -41,6 +41,8 @@ export class SortingQuestion extends LitElement {
       this.addEventListener("dragleave", this.dragLeave);
       this.addEventListener("drop", this.drop);
     });
+
+    console.log(this.correctOrder);
     //shuffles questions upon load for user
     this.shuffleQuestions();
   }
@@ -188,7 +190,7 @@ export class SortingQuestion extends LitElement {
     this.querySelectorAll("sq-question").forEach(node => {
       node.removeAttribute("correct");
     });
-    this.shuffleQuestions();
+    // this.shuffleQuestions();
   }
 
   __showSolution() {
@@ -297,6 +299,15 @@ export class SortingQuestion extends LitElement {
         padding: 2px 10px;
       }
 
+      .shuffleButton {
+        color: white;
+        background-color: #1a73d9;
+        border-radius: 5px;
+        font-size: 12pt;
+        padding: 2px 10px;
+        margin-left: 50px;
+      }
+
       .checkmark {
         padding-top: 5px;
       }
@@ -342,9 +353,10 @@ export class SortingQuestion extends LitElement {
             ? html`
               <button class="checkButton" @click="${this.__check}" tabindex='-1'>
                 <!-- <simple-icon-lite icon="check"></simple-icon-lite> -->
-                <img class="checkmark" src="https://img.icons8.com/material-outlined/0.6x/checked.png" />
+                <!--<img class="checkmark" src="https://img.icons8.com/material-outlined/0.6x/checked.png" />-->
                 Check
               </button>
+              <button class="shuffleButton" @click="${this.shuffleQuestions}" tabindex='-1'>Shuffle</button>
             `
             : html`
               <p class="statusText">Correct: ${this.correctNum}</p>
